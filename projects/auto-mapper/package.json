@@ -1,0 +1,29 @@
+{
+  "name": "@ts-lab/auto-mapper",
+  "author": "Alex Fandiño <afandino99@gmail.com>",
+  "version": "0.0.3",
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "typings": "index.d.ts",
+  "description": "A very lightweight library to map objects in typescript.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "keywords": [
+    "typescript", "mapper", "mapping", "object", "objects", "map", "maps", "auto", "automapper", "auto-mapper"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlexFHer/ts-lab-automapper"
+  },
+  "bugs": {
+    "url": "https://github.com/AlexFHer/ts-lab-automapper/issues"
+  }
+}

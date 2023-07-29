@@ -16,7 +16,7 @@ export class Profile<S extends object, D extends object> {
   /**
    * Internal method to get the initial state of the destination object
    */
-  getInitialState(): D {
+  public getInitialState(): D {
     return { ...this._destinationInitialState };
   }
 }

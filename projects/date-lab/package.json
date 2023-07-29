@@ -1,0 +1,9 @@
+{
+  "name": "date-lab",
+  "version": "0.0.1",
+  "dependencies": {
+    "tslib": "^2.3.0",
+    "tzdata": "^1.0.38"
+  },
+  "sideEffects": false
+}

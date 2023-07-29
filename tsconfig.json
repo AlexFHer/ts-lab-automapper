@@ -22,6 +22,9 @@
     "paths": {
       "auto-mapper": [
         "dist/auto-mapper"
+      ],
+      "date-lab": [
+        "dist/date-lab"
       ]
     },
     "lib": [

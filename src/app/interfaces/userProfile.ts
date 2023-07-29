@@ -1,4 +1,5 @@
-import { Profile } from "@ts-lab/auto-mapper";
+
+import { Profile } from "auto-mapper";
 import { User } from "./user";
 import { UserDto } from "./userDto";
 

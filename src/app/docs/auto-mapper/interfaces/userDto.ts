@@ -5,4 +5,5 @@ export interface UserDto {
   email: string;
   city: string;
   password: string;
+  config: string;
 }

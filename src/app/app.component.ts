@@ -1,7 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { AutoMapper } from "@ts-lab/auto-mapper";
-import { UserDto } from "./interfaces/userDto";
-import { userProfile } from "./interfaces/userProfile";
+import { AutoMapper } from "../../projects/auto-mapper/src/lib/classes";
+import { ToyClass } from "./docs/auto-mapper/classes/toy";
+import { userDtoToUserProfile } from "./docs/auto-mapper/interfaces/userProfile";
+import { toyDtoMock } from "./docs/auto-mapper/mocks/toy.mocks";
+import { userDtoMock, usersDtosMock } from "./docs/auto-mapper/mocks/user.mocks";
+import { dtoToyToToyProfile } from "./docs/auto-mapper/profiles/toy.profile";
+
+
+
+
+interface ToyDto {
+  name: string;
+  price: number;
+  available: boolean;
+}
 
 @Component({
   selector: 'app-root',
@@ -9,19 +21,8 @@ import { userProfile } from "./interfaces/userProfile";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'ts-tools-lib';
-
-  userDtoMock: UserDto = {
-    id: '1',
-    name: 'John',
-    city: 'New York',
-    email: 'email@email.com',
-    password: '********',
-    surname: 'Doe'
-  }
 
   public ngOnInit() {
-    const user = AutoMapper.map(this.userDtoMock, userProfile);
-    console.log(user);
+
   }
 }

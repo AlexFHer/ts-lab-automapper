@@ -4,7 +4,7 @@ export class Profile<S extends object, D extends object> {
   private readonly _destinationInitialState: D;
 
   constructor(destinationInitialState: D) {
-    this._destinationInitialState = destinationInitialState;
+    this._destinationInitialState = {...destinationInitialState};
   }
 
   public forMember<K extends keyof D>(destKey: K, destFn: PropertyMapper<S, D, K>): this {
@@ -16,7 +16,7 @@ export class Profile<S extends object, D extends object> {
   /**
    * Internal method to get the initial state of the destination object
    */
-  getInitialState(): D {
+  public getInitialState(): D {
     return { ...this._destinationInitialState };
   }
 }

@@ -1,8 +1,8 @@
 # Ts-lab
 
-A library where you can find typescript utils, helpers and more.
+A group of libraries to help you develop faster and cleaner in typescript.
 
-## Available features
+## Available libraries
 
 * Automapper
 * more soon...

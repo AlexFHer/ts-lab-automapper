@@ -1,6 +1,6 @@
 # Ts-lab
 
-A library where you can find typescript utils, helpers and more.
+A group of libraries where you can find typescript utils, helpers and more.
 
 ## Available libraries
 

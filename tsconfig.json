@@ -22,6 +22,9 @@
     "paths": {
       "auto-mapper": [
         "dist/auto-mapper"
+      ],
+      "object-validator": [
+        "dist/object-validator"
       ]
     },
     "lib": [

@@ -1,7 +1,7 @@
 {
-  "name": "@ts-lab/auto-mapper",
+  "name": "@ts-lab/object-validator",
   "author": "Alex Fandiño <afandino99@gmail.com>",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "dependencies": {
     "tslib": "^2.3.0"
   },
@@ -11,22 +11,18 @@
   },
   "license": "MIT",
   "typings": "index.d.ts",
-  "description": "A very lightweight library to map objects in typescript.",
+  "description": "A very lightweight library to validate objects in typescript.",
   "main": "index.js",
   "directories": {
     "lib": "lib"
   },
   "keywords": [
     "typescript",
-    "mapper",
-    "mapping",
+    "typescript object validator",
     "object",
-    "objects",
-    "map",
-    "maps",
-    "auto",
-    "automapper",
-    "auto-mapper"
+    "object-validator",
+    "validations",
+    "validity"
   ],
   "repository": {
     "type": "git",

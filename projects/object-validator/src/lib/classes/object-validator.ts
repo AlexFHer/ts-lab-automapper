@@ -10,6 +10,11 @@ export class ObjectValidator<T> {
     return this;
   }
 
+  public removeValidationRule<P extends keyof T>(_property: P): this {
+    delete this.validations[_property];
+    return this;
+  }
+
   public validate(data: T): boolean {
     let isValid = true;
     for (const property in this.validations) {
@@ -24,5 +29,18 @@ export class ObjectValidator<T> {
       }
     }
     return isValid;
+  }
+
+  public clone(): ObjectValidator<T> {
+    const clone = new ObjectValidator<T>();
+    for (const property in this.validations) {
+      if (this.validations.hasOwnProperty(property)) {
+        const validations = this.validations[property];
+        for (const validation of validations) {
+          clone.addValidationRule(property, validation);
+        }
+      }
+    }
+    return clone;
   }
 }

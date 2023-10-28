@@ -1,7 +1,7 @@
 {
   "name": "@ts-lab/object-validator",
   "author": "Alex Fandiño <afandino99@gmail.com>",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "dependencies": {
     "tslib": "^2.3.0"
   },
@@ -17,10 +17,12 @@
     "lib": "lib"
   },
   "keywords": [
-    "typescript",
-    "typescript object validator",
-    "object",
+    "@ts-lab/object-validator",
     "object-validator",
+    "typescript object validator",
+    "object validator",
+    "typescript",
+    "object",
     "validations",
     "validity"
   ],

@@ -1,6 +1,6 @@
 # Object validator for typescript
 
-A very lightweight library to create validations objects in typescript.
+A very lightweight library to create configurations to validate objects in typescript.
 
 ## Installation
 
@@ -70,3 +70,26 @@ Then the data can be validated with that configuration.
 formInputValidator.validate(formOutputMock); // true
 formInputValidator.validate(formOutputMock2); // false
 ```
+
+A validation for a property can also be removed.
+
+```typescript
+  const formOutputValidator = new ObjectValidator<UserFormOutput>()
+.addValidationRule('name', value => value.includes('John'))
+.addValidationRule('age', value => value > 18)
+
+formInputValidator.removeValidationRule('name');
+```
+
+In order to create more than 1 validation configurations with small adjustments there is a method to clone the actual configuration.
+
+```typescript
+  const validatorForLessAge = new ObjectValidator<UserFormOutput>()
+.addValidationRule('name', value => value.includes('John'))
+.addValidationRule('age', value => value > 18)
+
+const validatorForMoreAge = validatorForLessAge.clone()
+.addValidationRule('age', value => value < 65)
+```
+
+The "validatorForMoreAge" configuration will have the same rules as "validatorForLessAge" plus the new rule for the "age" property.

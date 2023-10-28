@@ -41,4 +41,36 @@ describe('ObjectValidator', () => {
     .addValidationRule('email', value => value.includes('@'))
     expect(validator.validate(mockData)).toBeFalse();
   });
+
+  it('should correctly clone', () => {
+    const mockData: UserFormOutput = {
+      name: 'John',
+      email: 'John@gmail.com',
+      age: 15,
+      hobbies: []
+    }
+    const normalValidator = new ObjectValidator<UserFormOutput>()
+    .addValidationRule('name', value => value.includes('John'))
+    .addValidationRule('email', value => value.length > 0);
+    const clonedValidator = normalValidator.clone()
+    .addValidationRule('age', value => value > 18);
+    expect(normalValidator.validate(mockData)).toBeTrue();
+    expect(clonedValidator.validate(mockData)).toBeFalse();
+  });
+
+  it('should remove a validation', () => {
+    const mockData: UserFormOutput = {
+      name: 'John',
+      email: 'John@gmail.com',
+      age: 15,
+      hobbies: []
+    }
+    const failedValidator = new ObjectValidator<UserFormOutput>()
+    .addValidationRule('name', value => value.includes('John'))
+    .addValidationRule('age', value => value > 18);
+
+    expect(failedValidator.validate(mockData)).toBeFalse();
+    const successValidator = failedValidator.removeValidationRule('age');
+    expect(successValidator.validate(mockData)).toBeTrue();
+  });
 });

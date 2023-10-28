@@ -15,9 +15,18 @@ export class ObjectValidatorDocsComponent implements OnInit {
     .addValidationRule('name', value => value.includes('John'))
     .addValidationRule('hobbies', value => value.length > 0)
     .addValidationRule('age', value => value > 18)
+    .addValidationRule('age', value => value < 65)
     .addValidationRule('email', value => value.includes('@'))
     .addValidationRule('city', value => value.name.length > 0 && value.country.length > 0)
     console.log(formOutputValidator.validate(formOutputMock));
+
+    const validationWithoutAge = formOutputValidator
+    .clone()
+    .removeValidationRule('age')
+
+    console.log(formOutputValidator.validate(formOutputMock));
+    console.log(formOutputValidator);
+    console.log(validationWithoutAge);
   }
 
 

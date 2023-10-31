@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { delay, map, of } from "rxjs";
 import { ObjectValidator } from "../../../../projects/object-validator/src/lib/classes/object-validator";
 import { UserFormOutput } from "./interfaces/form-output";
 import { formOutputMock } from "./mocks/form-output.mock";
@@ -11,22 +12,22 @@ import { formOutputMock } from "./mocks/form-output.mock";
 export class ObjectValidatorDocsComponent implements OnInit {
 
   ngOnInit(): void {
-    const formOutputValidator = new ObjectValidator<UserFormOutput>()
-    .addValidationRule('name', value => value.includes('John'))
-    .addValidationRule('hobbies', value => value.length > 0)
-    .addValidationRule('age', value => value > 18)
-    .addValidationRule('age', value => value < 65)
-    .addValidationRule('email', value => value.includes('@'))
-    .addValidationRule('city', value => value.name.length > 0 && value.country.length > 0)
-    console.log(formOutputValidator.validate(formOutputMock));
+    const objectValidator = new ObjectValidator<UserFormOutput>();
+    // @ts-ignore
+    const subjectUserHasMoreThan20Years: Promise<boolean> = of(formOutputMock)
+    .pipe(
+      map((user: UserFormOutput) => user.age < 20),
+      delay(3000)
+    ).toPromise();
 
-    const validationWithoutAge = formOutputValidator
-    .clone()
-    .removeValidationRule('age')
+    objectValidator
+    .addValidationRule('age', (age: number) => age > 20)
+    .addAsyncValidationRule('age', () => subjectUserHasMoreThan20Years);
 
-    console.log(formOutputValidator.validate(formOutputMock));
-    console.log(formOutputValidator);
-    console.log(validationWithoutAge);
+    objectValidator.validateAsync(formOutputMock)
+    .then(result => {
+      console.log('result', result);
+    })
   }
 
 

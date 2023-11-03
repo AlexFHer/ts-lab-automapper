@@ -1,7 +1,7 @@
 {
   "name": "@ts-lab/object-validator",
   "author": "Alex Fandiño <afandino99@gmail.com>",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "dependencies": {
     "tslib": "^2.3.0"
   },
@@ -9,26 +9,30 @@
   "publishConfig": {
     "access": "public"
   },
+  "scripts": {
+    "build": "ng build object-validator",
+    "test": "ng test object-validator",
+    "test:coverage": "ng test object-validator --code-coverage"
+  },
   "license": "MIT",
   "typings": "index.d.ts",
-  "description": "A very lightweight library to validate objects in typescript.",
+  "description": "A very lightweight library to create reusable validation configurations to validate objects in typescript.",
   "main": "index.js",
   "directories": {
     "lib": "lib"
   },
   "keywords": [
-    "@ts-lab/object-validator",
-    "object-validator",
-    "typescript object validator",
     "object validator",
+    "typescript object validator",
+    "object-validator",
     "typescript",
     "object",
     "validations",
-    "validity"
+    "valid"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/AlexFHer/ts-lab"
+    "url": "https://github.com/AlexFHer/ts-lab/tree/master/projects/object-validator"
   },
   "bugs": {
     "url": "https://github.com/AlexFHer/ts-lab/issues"

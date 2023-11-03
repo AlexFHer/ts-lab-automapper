@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { delay, map, of } from "rxjs";
+import { delay, lastValueFrom, map, of } from "rxjs";
 import { ObjectValidator } from "../../../../projects/object-validator/src/lib/classes/object-validator";
 import { UserFormOutput } from "./interfaces/form-output";
 import { formOutputMock } from "./mocks/form-output.mock";
@@ -11,23 +11,34 @@ import { formOutputMock } from "./mocks/form-output.mock";
 })
 export class ObjectValidatorDocsComponent implements OnInit {
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const objectValidator = new ObjectValidator<UserFormOutput>();
     // @ts-ignore
-    const subjectUserHasMoreThan20Years: Promise<boolean> = of(formOutputMock)
+    const subjectUserHasMoreThan20Years = of(formOutputMock)
     .pipe(
-      map((user: UserFormOutput) => user.age < 20),
-      delay(3000)
-    ).toPromise();
+      delay(5000),
+      map((user: UserFormOutput) => {
+        console.log("20 validated");
+        return user.age > 20
+      })
+    );
+
+    const subjectUserHasMoreThan70Years = of(formOutputMock)
+    .pipe(
+      delay(5000),
+      map((user: UserFormOutput) => {
+        console.log("70 validated");
+        return user.age > 70
+      }),
+    );
 
     objectValidator
     .addValidationRule('age', (age: number) => age > 20)
-    .addAsyncValidationRule('age', () => subjectUserHasMoreThan20Years);
+    .addAsyncValidationRule('age', () => lastValueFrom(subjectUserHasMoreThan20Years))
+    .addAsyncValidationRule('age', () => lastValueFrom(subjectUserHasMoreThan70Years))
 
-    objectValidator.validateAsync(formOutputMock)
-    .then(result => {
-      console.log('result', result);
-    })
+    const resultValidations = await objectValidator.validateAsync(formOutputMock);
+    console.log(resultValidations);
   }
 
 

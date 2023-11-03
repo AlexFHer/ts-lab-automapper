@@ -1,6 +1,6 @@
 # Object validator for typescript
 
-A very lightweight library to create configurations to validate objects in typescript.
+A very lightweight library to create reusable configurations to validate objects in typescript.
 
 ## Installation
 
@@ -23,18 +23,18 @@ export interface UserFormOutput {
 With this data:
 
 ```typescript
-export const formOutputMock: UserFormOutput = {
+const formOutputMock: UserFormOutput = {
   name: 'John',
   age: 20,
 }
-export const formOutputMock2: UserFormOutput = {
+const formOutputMock2: UserFormOutput = {
   name: 'John',
   age: 70,
   hobbies: ['football', 'basketball'],
 }
 ```
 
-We firstly create 'ObjectValidator' instance.
+We firstly create 'ObjectValidator' instance specifing the **type**.
 
 ```typescript
 
@@ -42,7 +42,9 @@ const formOutputValidator = new ObjectValidator<UserFormOutput>()
 
 ```
 
-Then we add validation rules for each property we want to validate, for that the *type* must be set.
+## Creating synchronous validations
+
+Then we can add validations for each property of the object.
 
 ```typescript
 
@@ -52,6 +54,8 @@ const formOutputValidator = new ObjectValidator<UserFormOutput>()
 .addValidationRule('name', value => value.includes('John'))
 .addValidationRule('age', value => value > 18)
 .addValidationRule('age', value => value < 65)
+
+// NOTE -----------------
 // if the property does not exist on the object, an error will be thrown when compiling
 .addValidationRule('fakeName', value => value.includes('John')) // Error: Property fakeName does not exist on object
 // if the expected type (string) does not match the type of the property (number), an error will be thrown when compiling
@@ -71,6 +75,33 @@ formInputValidator.validate(formOutputMock); // true
 formInputValidator.validate(formOutputMock2); // false
 ```
 
+## Creating asynchronous validations
+
+The library also supports asynchronous validations with **promises**.
+
+```typescript
+
+const asyncCall = of(mockData)
+.pipe(
+  map(data => data.age > 18),
+  delay(1000)
+)
+
+const formOutputValidator = new ObjectValidator<UserFormOutput>()
+.addValidationRule('name', value => value.includes('John'))
+.addValidationRule('age', value => value > 18)
+.addValidationRule('age', value => value < 65)
+.addAsyncValidationRule('hobbies', value => lastValueFrom(asyncCall))
+```
+
+In order to validate asyncronous validations, the **validateAsync** method must be used which return a promise.
+
+```typescript
+  isValid = await formInputValidator.validateAsync(formOutputMock); // true
+```
+
+## Validations removal
+
 A validation for a property can also be removed.
 
 ```typescript
@@ -80,6 +111,8 @@ A validation for a property can also be removed.
 
 formInputValidator.removeValidationRule('name');
 ```
+
+## Configuration cloning
 
 In order to create more than 1 validation configurations with small adjustments there is a method to clone the actual configuration.
 

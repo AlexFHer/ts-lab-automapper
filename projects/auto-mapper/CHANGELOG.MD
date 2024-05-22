@@ -1,3 +1,6 @@
+## 1.0.0
+
+- All tests done for 1.0.0 release
 
 ## 0.0.5
 
